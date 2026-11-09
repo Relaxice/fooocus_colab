@@ -1,0 +1,1118 @@
+<title>Fooocus Colab Files</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<style>
+:root {
+  --bg:#0d1117; --bg-p:#161b22; --bg-h:rgba(177,186,196,.1); --bg-a:rgba(56,139,253,.15);
+  --bd:#30363d; --fg:#e6edf3; --fg2:#7d8590; --fg3:#484f58;
+  --acc:#58a6ff; --grn:#3fb950; --org:#d29922; --red:#f85149; --pur:#bc8cff;
+  --hk:#ff7b72; --hs:#a5d6ff; --hf:#d2a8ff; --hn:#79c0ff; --hv:#7ee787; --hb:#ffa657; --hc:#8b949e;
+  --sw:240px; --hh:44px; --th:36px; --sh:24px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f6f8fa; --bg-p:#fff; --bg-h:rgba(175,184,193,.2); --bg-a:rgba(9,105,218,.1);
+    --bd:#d0d7de; --fg:#1f2328; --fg2:#57606a; --fg3:#afb8c1;
+    --acc:#0969da; --grn:#1a7f37; --org:#9a6700; --red:#cf222e; --pur:#8250df;
+    --hk:#cf222e; --hs:#0a3069; --hf:#8250df; --hn:#0550ae; --hv:#116329; --hb:#953800; --hc:#6e7781;
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f6f8fa; --bg-p:#fff; --bg-h:rgba(175,184,193,.2); --bg-a:rgba(9,105,218,.1);
+  --bd:#d0d7de; --fg:#1f2328; --fg2:#57606a; --fg3:#afb8c1;
+  --acc:#0969da; --grn:#1a7f37; --org:#9a6700; --red:#cf222e; --pur:#8250df;
+  --hk:#cf222e; --hs:#0a3069; --hf:#8250df; --hn:#0550ae; --hv:#116329; --hb:#953800; --hc:#6e7781;
+  color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-size:13px;
+  background:var(--bg);color:var(--fg);display:flex;flex-direction:column;
+}
+
+/* ── HEADER ── */
+.hdr{
+  display:flex;align-items:center;gap:8px;height:var(--hh);flex-shrink:0;
+  background:var(--bg-p);border-bottom:1px solid var(--bd);
+  padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));
+  user-select:none;
+}
+.logo{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px;flex-shrink:0}
+.spc{flex:1}
+.hbtn{
+  display:flex;align-items:center;gap:5px;padding:5px 10px;
+  border:1px solid var(--bd);background:none;color:var(--fg);border-radius:6px;
+  font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap;
+  transition:background .15s,border-color .15s;
+}
+.hbtn:hover{background:var(--bg-h);border-color:var(--acc)}
+.ibtn{
+  display:flex;align-items:center;justify-content:center;width:28px;height:28px;
+  border:none;background:none;color:var(--fg2);cursor:pointer;border-radius:5px;
+  transition:color .15s,background .15s;flex-shrink:0;
+}
+.ibtn:hover{color:var(--fg);background:var(--bg-h)}
+.srch{
+  display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--bd);
+  border-radius:6px;padding:4px 10px;font-size:12px;color:var(--fg2);cursor:pointer;
+  transition:border-color .15s;min-width:150px;
+}
+.srch:hover{border-color:var(--acc)}
+.srch kbd{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--fg3)}
+
+/* ── MAIN ── */
+.main{display:flex;flex:1;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sbar{
+  width:var(--sw);background:var(--bg-p);border-right:1px solid var(--bd);
+  display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;
+}
+.sbar-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px max(10px,env(safe-area-inset-left,0px)) 6px max(10px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid var(--bd);min-height:32px;
+}
+.sbar-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2)}
+.sbar-acts{display:flex;gap:1px}
+.ftree{
+  flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 0;
+  padding-left:max(0px,env(safe-area-inset-left,0px));
+}
+.ftree::-webkit-scrollbar{width:6px}
+.ftree::-webkit-scrollbar-track{background:transparent}
+.ftree::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+
+.ti{
+  display:flex;align-items:center;gap:4px;
+  padding:3px 8px 3px 4px;cursor:pointer;border-radius:4px;margin:0 4px 1px;
+  transition:background .1s;position:relative;
+  font-size:13px;
+}
+.ti:hover{background:var(--bg-h)}
+.ti.act{background:var(--bg-a);color:var(--acc)}
+.ti .arr{flex-shrink:0;width:16px;display:flex;align-items:center;justify-content:center;color:var(--fg2);transition:transform .15s}
+.ti.exp .arr{transform:rotate(90deg)}
+.ti .ico{flex-shrink:0;width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+.ti .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ti .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex-shrink:0}
+.tch{padding-left:0}
+
+/* ── EDITOR ── */
+.ed{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);min-width:0}
+.tabs{
+  display:flex;background:var(--bg-p);border-bottom:1px solid var(--bd);
+  overflow-x:auto;overflow-y:hidden;flex-shrink:0;scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  display:flex;align-items:center;gap:5px;padding:0 12px;height:var(--th);
+  cursor:pointer;font-size:12px;color:var(--fg2);border-right:1px solid var(--bd);
+  white-space:nowrap;flex-shrink:0;transition:color .15s;position:relative;
+}
+.tab:hover{color:var(--fg)}
+.tab.act{color:var(--fg)}
+.tab.act::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--acc)}
+.tab .tc{
+  display:flex;align-items:center;justify-content:center;width:16px;height:16px;
+  border-radius:3px;opacity:0;transition:opacity .15s;flex-shrink:0;
+}
+.tab:hover .tc,.tab.act .tc{opacity:1}
+.tab .tc:hover{background:var(--bg-h);color:var(--fg)}
+.tab.mod .tn::after{content:'●';margin-left:3px;font-size:8px;color:var(--acc);vertical-align:middle}
+
+.edbody{flex:1;display:flex;overflow:hidden;position:relative}
+.lns{
+  padding:16px 8px 16px max(16px,env(safe-area-inset-left,0px));
+  font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;
+  color:var(--fg3);text-align:right;user-select:none;overflow:hidden;
+  flex-shrink:0;min-width:52px;border-right:1px solid var(--bd);
+}
+.cwrap{flex:1;overflow:auto;min-width:0}
+.cwrap::-webkit-scrollbar{width:8px;height:8px}
+.cwrap::-webkit-scrollbar-track{background:transparent}
+.cwrap::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
+.cview{
+  padding:16px 16px 16px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;
+  white-space:pre;min-width:max-content;
+}
+.cedit{
+  display:none;width:100%;height:100%;
+  padding:16px 16px 16px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;
+  background:var(--bg);color:var(--fg);border:none;outline:none;resize:none;
+  tab-size:2;white-space:pre;overflow-wrap:normal;overflow-x:auto;
+}
+.edbody.editing .cview{display:none}
+.edbody.editing .cedit{display:block}
+
+/* ── STATUS ── */
+.sbar2{
+  display:flex;align-items:center;gap:10px;height:var(--sh);
+  background:var(--acc);color:#fff;flex-shrink:0;font-size:11px;user-select:none;
+  padding:0 max(12px,env(safe-area-inset-right,0px)) 0 max(12px,env(safe-area-inset-left,0px));
+}
+.si{display:flex;align-items:center;gap:3px;opacity:.9}
+.ssep{opacity:.4}
+.sbar2 .edbtn{
+  margin-left:auto;cursor:pointer;opacity:.8;
+  background:rgba(255,255,255,.15);border-radius:4px;padding:1px 7px;
+  border:1px solid rgba(255,255,255,.25);font:inherit;color:#fff;
+}
+.sbar2 .edbtn:hover{opacity:1;background:rgba(255,255,255,.25)}
+
+/* ── EMPTY ── */
+.empty{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;color:var(--fg2);padding:32px;
+}
+.empty svg{opacity:.2}
+.empty-t{font-size:15px;font-weight:500;color:var(--fg)}
+.empty-h{font-size:12px;text-align:center;max-width:260px;line-height:1.5}
+
+/* ── CONTEXT MENU ── */
+.ctx{
+  position:fixed;background:var(--bg-p);border:1px solid var(--bd);border-radius:8px;
+  padding:4px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.5);min-width:160px;
+}
+.cxi{
+  display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:4px;
+  cursor:pointer;font-size:13px;color:var(--fg);transition:background .1s;
+}
+.cxi:hover{background:var(--bg-h)}
+.cxi.del{color:var(--red)}
+.cx-sep{height:1px;background:var(--bd);margin:3px 0}
+
+/* ── MODAL ── */
+.mover{
+  position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal{
+  background:var(--bg-p);border:1px solid var(--bd);border-radius:10px;
+  padding:20px;min-width:300px;max-width:90vw;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);
+}
+.modal-t{font-size:14px;font-weight:600;margin-bottom:12px}
+.modal-msg{font-size:13px;color:var(--fg2);margin-bottom:14px;line-height:1.5}
+.modal input{
+  width:100%;padding:7px 11px;background:var(--bg);border:1px solid var(--bd);
+  border-radius:6px;color:var(--fg);font-size:13px;font-family:'JetBrains Mono',monospace;
+  outline:none;margin-bottom:12px;
+}
+.modal input:focus{border-color:var(--acc)}
+.modal-row{display:flex;justify-content:flex-end;gap:8px}
+.mbtn{
+  padding:6px 14px;border-radius:6px;font-size:13px;cursor:pointer;
+  border:1px solid var(--bd);background:none;color:var(--fg);font-family:inherit;
+}
+.mbtn:hover{background:var(--bg-h)}
+.mbtn.ok{background:var(--acc);border-color:var(--acc);color:#fff}
+.mbtn.ok:hover{opacity:.85}
+.mbtn.danger{background:var(--red);border-color:var(--red);color:#fff}
+.mbtn.danger:hover{opacity:.85}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:36px;left:50%;transform:translateX(-50%);
+  background:var(--bg-p);border:1px solid var(--bd);border-radius:7px;
+  padding:7px 16px;font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.4);
+  z-index:2000;pointer-events:none;opacity:0;transition:opacity .25s;white-space:nowrap;
+}
+.toast.on{opacity:1}
+
+/* ── HIGHLIGHT ── */
+.hljs{display:block;overflow-x:visible;background:transparent;color:var(--fg)}
+.hljs-comment,.hljs-quote{color:var(--hc);font-style:italic}
+.hljs-keyword,.hljs-doctag,.hljs-formula,.hljs-subst,.hljs-deletion{color:var(--hk)}
+.hljs-string,.hljs-regexp,.hljs-addition,.hljs-meta .hljs-string{color:var(--hs)}
+.hljs-title,.hljs-section,.hljs-title.function_,.hljs-name{color:var(--hf);font-weight:600}
+.hljs-title.class_,.hljs-class .hljs-title{color:var(--hf)}
+.hljs-number,.hljs-literal,.hljs-params,.hljs-attr{color:var(--hn)}
+.hljs-variable,.hljs-template-variable,.hljs-selector-id,.hljs-link{color:var(--hv)}
+.hljs-built_in,.hljs-type{color:var(--hb)}
+.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-selector-tag{color:var(--hk)}
+.hljs-tag{color:var(--hv)}
+.hljs-attribute{color:var(--hn)}
+.hljs-meta{color:var(--hc)}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:bold}
+
+/* ── MOBILE ── */
+.mob-tog{display:none}
+@media(max-width:620px){
+  .mob-tog{display:flex}
+  .srch .srch-txt{display:none}
+  .sbar{
+    position:fixed;top:var(--hh);left:0;bottom:0;z-index:200;
+    transform:translateX(-100%);transition:transform .22s;
+    box-shadow:4px 0 20px rgba(0,0,0,.5);
+  }
+  .sbar.open{transform:translateX(0)}
+  .sbar-backdrop{
+    display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.4);
+  }
+  .sbar-backdrop.on{display:block}
+}
+</style>
+
+<div id="app" style="display:flex;flex-direction:column;height:100%">
+  <!-- HEADER -->
+  <div class="hdr">
+    <button class="ibtn mob-tog" id="mobTog" aria-label="Menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M1 2.5h14M1 8h14M1 13.5h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="logo">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect width="20" height="20" rx="4" fill="var(--acc)" opacity=".18"/>
+        <path d="M4 15V5l5.5 5L4 15z" fill="var(--acc)"/>
+        <path d="M10.5 15V5L16 10l-5.5 5z" fill="var(--acc)" opacity=".45"/>
+      </svg>
+      Fooocus Colab
+    </div>
+    <div class="spc"></div>
+    <div class="srch" id="searchBtn" role="button" tabindex="0" aria-label="Search files">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" opacity=".6">
+        <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398l3.85 3.85a1 1 0 001.415-1.415l-3.868-3.833zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/>
+      </svg>
+      <span class="srch-txt">Search…</span>
+      <kbd>⌘K</kbd>
+    </div>
+    <button class="ibtn" id="themeTog" title="Toggle theme" aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 11a3 3 0 110-6 3 3 0 010 6zm0 1a4 4 0 100-8 4 4 0 000 8zM8 0a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2A.5.5 0 018 0zm0 13a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2A.5.5 0 018 13zm8-5a.5.5 0 01-.5.5h-2a.5.5 0 010-1h2a.5.5 0 01.5.5zM3 8a.5.5 0 01-.5.5h-2a.5.5 0 010-1h2A.5.5 0 013 8zm10.657-5.657a.5.5 0 010 .707l-1.414 1.415a.5.5 0 11-.707-.708l1.414-1.414a.5.5 0 01.707 0zm-9.193 9.193a.5.5 0 010 .707L3.05 13.657a.5.5 0 01-.707-.707l1.414-1.414a.5.5 0 01.707 0zm9.193 2.121a.5.5 0 01-.707 0l-1.414-1.414a.5.5 0 01.707-.707l1.414 1.414a.5.5 0 010 .707zM4.464 4.465a.5.5 0 01-.707 0L2.343 3.05a.5.5 0 11.707-.707l1.414 1.414a.5.5 0 010 .707z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="main">
+    <div id="sbarBack" class="sbar-backdrop"></div>
+
+    <!-- SIDEBAR -->
+    <div class="sbar" id="sidebar">
+      <div class="sbar-hd">
+        <span class="sbar-title">Explorer</span>
+        <div class="sbar-acts">
+          <button class="ibtn" id="newFile" title="New file" style="width:24px;height:24px">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M9.293 1.5A1 1 0 018.586 1H3.5A1.5 1.5 0 002 2.5v11A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V7.414a1 1 0 00-.293-.707L9.293 1.5zm.914 1.207L12.793 6.5H10a.5.5 0 01-.5-.5V3.207L10.207 2.707z"/>
+              <path d="M8 10a.5.5 0 01.5.5v2.5h2.5a.5.5 0 010 1H8.5V16.5a.5.5 0 01-1 0V14H5a.5.5 0 010-1h2.5v-2.5A.5.5 0 018 10z"/>
+            </svg>
+          </button>
+          <button class="ibtn" id="newFolder" title="New folder" style="width:24px;height:24px">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M.54 3.87L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3h3.982a2 2 0 011.992 2.181l-.637 7A2 2 0 0113.174 14H2.826a2 2 0 01-1.991-1.819l-.637-7a1.99 1.99 0 01.342-1.31zM2.19 4a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91h10.348a1 1 0 00.995-.91l.637-7A1 1 0 0013.81 4H2.19zm4.69-1.707A1 1 0 006.172 2H2.5a1 1 0 00-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h9.629a3 3 0 00-.383-.293z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="ftree" id="ftree"></div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="ed">
+      <div class="tabs" id="tabs"></div>
+      <div class="edbody" id="edbody"></div>
+      <div class="sbar2" id="statusbar">
+        <span class="si">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M6.854 4.646a.5.5 0 010 .708L4.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0zm2.292 0a.5.5 0 000 .708L11.793 8l-2.647 2.646a.5.5 0 00.708.708l3-3a.5.5 0 000-.708l-3-3a.5.5 0 00-.708 0z"/>
+          </svg>
+          Fooocus Colab
+        </span>
+        <span class="ssep">·</span>
+        <span class="si" id="stLang">No file open</span>
+        <span class="ssep" id="stSep" hidden>·</span>
+        <span class="si" id="stLines" hidden></span>
+        <button class="edbtn" id="edBtn" hidden></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ctx" id="ctx" hidden></div>
+
+<div class="mover" id="mover" hidden>
+  <div class="modal">
+    <div class="modal-t" id="mTitle"></div>
+    <div class="modal-msg" id="mMsg" hidden></div>
+    <input type="text" id="mInput" autocomplete="off" spellcheck="false"/>
+    <div class="modal-row" id="mRow"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+
+const D = {
+  'README.md': { t:'f', l:'markdown', c:
+`# Fooocus Colab
+
+Run [Fooocus](https://github.com/lllyasviel/Fooocus) image generation directly in Google Colab with one click.
+
+## Features
+
+- One-click setup and launch via Gradio public URL
+- Automatic model checkpoint downloading
+- Configurable sampling parameters
+- Support for SDXL models and LoRAs
+
+## Quick Start
+
+1. Open \`fooocus_colab.ipynb\` in Google Colab
+2. Run all cells
+3. Click the generated Gradio public URL
+
+## Configuration
+
+Edit \`config/default.json\` to change default settings:
+model selection, sampling parameters, resolution presets.
+
+## Requirements
+
+Google Colab with GPU runtime (T4 or better).
+See \`requirements.txt\` for Python dependencies.`
+  },
+  'requirements.txt': { t:'f', l:'text', c:
+`torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+gradio==3.41.2
+transformers>=4.30.0
+accelerate>=0.20.0
+safetensors>=0.3.1
+einops>=0.6.0
+Pillow>=9.0.0
+numpy>=1.23.0
+scipy>=1.9.0
+opencv-python>=4.7.0
+huggingface_hub>=0.17.0
+omegaconf>=2.3.0`
+  },
+  'fooocus_colab.ipynb': { t:'f', l:'json', c:
+`{
+  "nbformat": 4,
+  "nbformat_minor": 5,
+  "metadata": {
+    "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
+    "accelerator": "GPU",
+    "colab": {"gpuType": "T4", "provenance": []}
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": ["# Fooocus on Google Colab\\n", "GPU-accelerated image generation."]
+    },
+    {
+      "cell_type": "code",
+      "source": ["!pip install -r requirements.txt -q"]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git clone https://github.com/lllyasviel/Fooocus --depth 1\\n",
+        "%cd Fooocus\\n",
+        "!python modules/launcher.py --share"
+      ]
+    }
+  ]
+}`
+  },
+  'config': { t:'d', ch:{
+    'default.json': { t:'f', l:'json', c:
+`{
+  "default_model": "juggernautXL_v8Rundiffusion.safetensors",
+  "default_refiner": "None",
+  "default_loras": [
+    ["sd_xl_offset_example-lora_1.0.safetensors", 0.1]
+  ],
+  "default_cfg_scale": 7.0,
+  "default_sampler": "dpmpp_2m_sde_gpu",
+  "default_scheduler": "karras",
+  "default_steps": 30,
+  "default_base_model_sharpness": 2.0,
+  "default_prompt": "",
+  "default_negative_prompt": "lowres, bad anatomy, bad hands, missing fingers",
+  "default_image_width": 1152,
+  "default_image_height": 896,
+  "default_image_number": 2,
+  "default_output_format": "png",
+  "checkpoint_downloads": {
+    "juggernautXL_v8Rundiffusion.safetensors":
+      "https://huggingface.co/RunDiffusion/Juggernaut-XL-v8/resolve/main/juggernautXL_v8Rundiffusion.safetensors"
+  },
+  "lora_downloads": {
+    "sd_xl_offset_example-lora_1.0.safetensors":
+      "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_offset_example-lora_1.0.safetensors"
+  }
+}`
+    }
+  }},
+  'modules': { t:'d', ch:{
+    'launcher.py': { t:'f', l:'python', c:
+`"""Fooocus Colab launcher."""
+import os
+import sys
+import subprocess
+import argparse
+from pathlib import Path
+
+ROOT = Path(__file__).parent.parent
+
+
+def setup_environment() -> None:
+    """Install Python dependencies from requirements.txt."""
+    req = ROOT / 'requirements.txt'
+    subprocess.run(
+        [sys.executable, '-m', 'pip', 'install', '-r', str(req), '--quiet'],
+        check=True
+    )
+    print('✓ Environment ready')
+
+
+def download_models(config: dict) -> None:
+    """Download configured model checkpoints if not already present."""
+    ckpt_dir = ROOT / 'models' / 'checkpoints'
+    ckpt_dir.mkdir(parents=True, exist_ok=True)
+    for name, url in config.get('checkpoint_downloads', {}).items():
+        dest = ckpt_dir / name
+        if dest.exists():
+            print(f'  ↳ {name} already present')
+        else:
+            print(f'  ↓ Downloading {name}...')
+            subprocess.run(['wget', '--no-verbose', '-O', str(dest), url], check=True)
+
+    lora_dir = ROOT / 'models' / 'loras'
+    lora_dir.mkdir(parents=True, exist_ok=True)
+    for name, url in config.get('lora_downloads', {}).items():
+        dest = lora_dir / name
+        if not dest.exists():
+            subprocess.run(['wget', '--no-verbose', '-O', str(dest), url], check=True)
+
+
+def launch(args: argparse.Namespace) -> None:
+    """Start the Fooocus Gradio server."""
+    cmd = [sys.executable, str(ROOT / 'entry_with_update.py')]
+    if args.share:
+        cmd.append('--share')
+    if args.port != 7865:
+        cmd.extend(['--port', str(args.port)])
+    if args.listen:
+        cmd.append('--listen')
+    subprocess.run(cmd, check=True)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--share', action='store_true')
+    parser.add_argument('--port', type=int, default=7865)
+    parser.add_argument('--listen', action='store_true')
+    parser.add_argument('--skip-setup', action='store_true')
+    args = parser.parse_args()
+    if not args.skip_setup:
+        setup_environment()
+    from modules.api import load_config
+    download_models(load_config())
+    launch(args)`
+    },
+    'api.py': { t:'f', l:'python', c:
+`"""Configuration and model discovery utilities."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Optional
+
+CONFIG_PATH = Path(__file__).parent.parent / 'config' / 'default.json'
+MODELS_DIR  = Path(__file__).parent.parent / 'models'
+
+
+def load_config(path: Optional[Path] = None) -> dict:
+    """Load configuration from JSON; returns {} if the file is missing."""
+    f = path or CONFIG_PATH
+    if not f.exists():
+        return {}
+    with f.open('r', encoding='utf-8') as fh:
+        return json.load(fh)
+
+
+def save_config(config: dict, path: Optional[Path] = None) -> None:
+    """Write configuration to JSON, creating parent directories as needed."""
+    f = path or CONFIG_PATH
+    f.parent.mkdir(parents=True, exist_ok=True)
+    with f.open('w', encoding='utf-8') as fh:
+        json.dump(config, fh, indent=2)
+        fh.write('\\n')
+
+
+def get_checkpoints(subdir: str = 'checkpoints') -> list[str]:
+    """Return sorted filenames of available model checkpoints."""
+    p = MODELS_DIR / subdir
+    if not p.exists():
+        return []
+    return sorted(
+        f.name for f in p.iterdir()
+        if f.suffix.lower() in {'.safetensors', '.ckpt', '.pt', '.pth'}
+    )
+
+
+def get_loras() -> list[str]:
+    return get_checkpoints('loras')
+
+
+def model_exists(name: str, subdir: str = 'checkpoints') -> bool:
+    return (MODELS_DIR / subdir / name).exists()`
+    },
+    'flags.py': { t:'f', l:'python', c:
+`"""Global constants and runtime flags."""
+import os
+
+SAMPLERS = [
+    'euler', 'euler_ancestral', 'heun', 'heunpp2',
+    'dpm_2', 'dpm_2_ancestral', 'lms', 'dpm_fast',
+    'dpm_adaptive', 'dpmpp_2s_ancestral', 'dpmpp_sde',
+    'dpmpp_sde_gpu', 'dpmpp_2m', 'dpmpp_2m_sde',
+    'dpmpp_2m_sde_gpu', 'dpmpp_3m_sde', 'dpmpp_3m_sde_gpu',
+    'ddcfg_ddim_coupling', 'lcm',
+]
+
+SCHEDULERS = [
+    'normal', 'karras', 'exponential',
+    'sgm_uniform', 'simple', 'ddim_uniform',
+]
+
+RESOLUTION_PRESETS: dict[str, tuple[int, int]] = {
+    'SD 1.5 Square':    (512,  512),
+    'SD 1.5 Portrait':  (512,  768),
+    'SD 1.5 Landscape': (768,  512),
+    'SDXL Square':      (1024, 1024),
+    'SDXL Portrait':    (896,  1152),
+    'SDXL Landscape':   (1152, 896),
+    'SDXL Cinematic':   (1216, 832),
+    'SDXL Wide':        (1344, 768),
+}
+
+COLAB_MODE: bool = os.environ.get('COLAB_RELEASE_TAG') is not None
+SHARE_DEFAULT: bool = COLAB_MODE
+GPU_MEMORY_TIER: str = os.environ.get('FOOOCUS_VRAM_TIER', 'mid')`
+    }
+  }}
+};
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+
+let tabs = [], active = null, expanded = new Set(['config','modules']), modified = new Set(), editing = false;
+
+// Restore saved edits
+try {
+  const sv = JSON.parse(localStorage.getItem('fc-edits')||'{}');
+  for (const [p,c] of Object.entries(sv)) {
+    const n = node(p);
+    if (n && n.t==='f') { n.c = c; modified.add(p); }
+  }
+} catch{}
+
+// Restore theme
+try {
+  const t = localStorage.getItem('fc-theme');
+  if (t && t !== 'system') document.documentElement.setAttribute('data-theme', t);
+} catch{}
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+
+function node(path) {
+  const parts = path.split('/');
+  let cur = D;
+  for (let i = 0; i < parts.length; i++) {
+    if (!cur[parts[i]]) return null;
+    if (i === parts.length-1) return cur[parts[i]];
+    const n = cur[parts[i]];
+    if (n.t === 'd' && n.ch) cur = n.ch; else return null;
+  }
+}
+function parentOf(path) { const i = path.lastIndexOf('/'); return i===-1 ? null : path.slice(0,i); }
+function nameOf(path) { return path.split('/').pop(); }
+function ext(name) { const i = name.lastIndexOf('.'); return i===-1 ? '' : name.slice(i+1).toLowerCase(); }
+function lang(name) {
+  return {py:'python',js:'javascript',ts:'typescript',json:'json',md:'markdown',
+    txt:'plaintext',sh:'bash',yml:'yaml',yaml:'yaml',css:'css',html:'html',
+    ipynb:'json',toml:'toml',cfg:'ini',ini:'ini'}[ext(name)] || 'plaintext';
+}
+function langLabel(l) {
+  return {python:'Python',javascript:'JavaScript',typescript:'TypeScript',json:'JSON',
+    markdown:'Markdown',plaintext:'Plain Text',bash:'Shell',yaml:'YAML',
+    css:'CSS',html:'HTML',toml:'TOML',ini:'INI'}[l] || l;
+}
+function fileIcon(name, type) {
+  if (type==='d') return `<svg width="14" height="14" viewBox="0 0 16 16" fill="var(--org)"><path d="M.54 3.87L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3h3.982a2 2 0 011.992 2.181l-.637 7A2 2 0 0113.174 14H2.826a2 2 0 01-1.991-1.819l-.637-7a1.99 1.99 0 01.342-1.31z"/></svg>`;
+  const c = {py:'var(--grn)',js:'var(--org)',ts:'var(--acc)',json:'var(--org)',md:'var(--fg2)',
+    ipynb:'var(--pur)',sh:'var(--grn)',yml:'var(--red)',yaml:'var(--red)',
+    css:'var(--acc)',html:'var(--red)'}[ext(name)] || 'var(--fg2)';
+  return `<svg width="13" height="13" viewBox="0 0 16 16" fill="${c}"><path d="M4 0a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4.5L9.5 0H4zm5.5 1.5v3h3L9.5 1.5zM4 1h5v3.5A1.5 1.5 0 0010.5 6H14v8a1 1 0 01-1 1H3a1 1 0 01-1-1V2a1 1 0 011-1z"/></svg>`;
+}
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escA(s) { return esc(s).replace(/"/g,'&quot;'); }
+
+// ═══════════════════════════════════════════════════════
+// RENDER FILE TREE
+// ═══════════════════════════════════════════════════════
+
+function renderTree() {
+  document.getElementById('ftree').innerHTML = treeHTML(D, '', 0);
+  document.querySelectorAll('.ti[data-t="f"]').forEach(el => {
+    el.onclick = () => openFile(el.dataset.p);
+    el.oncontextmenu = e => { e.preventDefault(); showCtx(el.dataset.p, e.clientX, e.clientY); };
+    el.onkeydown = e => { if(e.key==='Enter') openFile(el.dataset.p); };
+  });
+  document.querySelectorAll('.ti[data-t="d"]').forEach(el => {
+    el.onclick = () => toggleDir(el.dataset.p);
+    el.oncontextmenu = e => { e.preventDefault(); showCtx(el.dataset.p, e.clientX, e.clientY, true); };
+    el.onkeydown = e => { if(e.key==='Enter') toggleDir(el.dataset.p); };
+  });
+}
+
+function treeHTML(obj, base, depth) {
+  const entries = Object.entries(obj).sort(([an,av],[bn,bv]) =>
+    av.t==='d' && bv.t!=='d' ? -1 : av.t!=='d' && bv.t==='d' ? 1 : an.localeCompare(bn)
+  );
+  let h = '';
+  for (const [name, item] of entries) {
+    const path = base ? `${base}/${name}` : name;
+    const isDir = item.t === 'd';
+    const exp = expanded.has(path);
+    const act = active === path;
+    const mod = modified.has(path);
+    const pad = isDir ? (8 + depth*14) : (8 + depth*14 + 18);
+    h += `<div class="ti${exp?' exp':''}${act?' act':''}" data-p="${path}" data-t="${item.t}" style="padding-left:${pad}px" role="button" tabindex="0">`;
+    if (isDir) h += `<span class="arr"><svg width="8" height="8" viewBox="0 0 16 16" fill="currentColor"><path d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"/></svg></span>`;
+    h += `<span class="ico">${fileIcon(name, item.t)}</span><span class="nm">${name}</span>`;
+    if (mod) h += `<span class="dot" title="Modified"></span>`;
+    h += `</div>`;
+    if (isDir && exp && item.ch) {
+      h += `<div class="tch">${treeHTML(item.ch, path, depth+1)}</div>`;
+    }
+  }
+  return h;
+}
+
+function toggleDir(path) {
+  expanded.has(path) ? expanded.delete(path) : expanded.add(path);
+  renderTree();
+}
+
+// ═══════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════
+
+function openFile(path) {
+  if (!tabs.includes(path)) tabs.push(path);
+  activate(path);
+  closeSidebar();
+}
+
+function activate(path) {
+  active = path; editing = false;
+  renderTabs(); renderEditor(); renderTree();
+}
+
+function closeTab(path, e) {
+  if (e) e.stopPropagation();
+  const i = tabs.indexOf(path);
+  if (i===-1) return;
+  tabs.splice(i,1);
+  if (active === path) { active = tabs[Math.min(i, tabs.length-1)] || null; editing = false; }
+  renderTabs(); renderEditor(); renderTree();
+}
+
+function renderTabs() {
+  const bar = document.getElementById('tabs');
+  bar.innerHTML = tabs.map(p => {
+    const name = nameOf(p);
+    const isAct = p === active, isMod = modified.has(p);
+    return `<div class="tab${isAct?' act':''}${isMod?' mod':''}" data-p="${p}" role="tab">
+      <span class="ico">${fileIcon(name,'f')}</span>
+      <span class="tn">${name}</span>
+      <span class="tc" data-cl="${p}" role="button" aria-label="Close ${name}">
+        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2.146 2.854a.5.5 0 11.708-.708L8 7.293l5.146-5.147a.5.5 0 01.708.708L8.707 8l5.147 5.146a.5.5 0 01-.708.708L8 8.707l-5.146 5.147a.5.5 0 01-.708-.708L7.293 8 2.146 2.854z"/>
+        </svg>
+      </span>
+    </div>`;
+  }).join('');
+  bar.querySelectorAll('.tab').forEach(el =>
+    el.addEventListener('click', e => { if (!e.target.closest('.tc')) activate(el.dataset.p); })
+  );
+  bar.querySelectorAll('.tc').forEach(el =>
+    el.addEventListener('click', e => closeTab(el.dataset.cl, e))
+  );
+}
+
+// ═══════════════════════════════════════════════════════
+// EDITOR
+// ═══════════════════════════════════════════════════════
+
+function renderEditor() {
+  const body = document.getElementById('edbody');
+  const stLang = document.getElementById('stLang');
+  const stLines = document.getElementById('stLines');
+  const stSep = document.getElementById('stSep');
+  const edBtn = document.getElementById('edBtn');
+
+  if (!active) {
+    body.className = 'edbody';
+    body.innerHTML = `<div class="empty">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+        <rect x="8" y="8" width="48" height="48" rx="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 24h24M20 32h16M20 40h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="empty-t">No file open</div>
+      <div class="empty-h">Select a file from the sidebar, or create a new one with the + button</div>
+    </div>`;
+    stLang.textContent='No file open'; stLines.hidden=true; stSep.hidden=true; edBtn.hidden=true;
+    return;
+  }
+
+  const n = node(active);
+  if (!n) return;
+  const l = n.l || lang(nameOf(active));
+  const content = n.c || '';
+  const lines = content.split('\n');
+  const lcount = lines.length;
+
+  let hl;
+  try {
+    hl = (l !== 'plaintext' && l !== 'text')
+      ? hljs.highlight(content, { language: l, ignoreIllegals: true }).value
+      : esc(content);
+  } catch { hl = esc(content); }
+
+  body.className = 'edbody' + (editing ? ' editing' : '');
+  body.innerHTML = `
+    <div class="lns" id="lns" aria-hidden="true">${lines.map((_,i)=>i+1).join('\n')}</div>
+    <div class="cwrap" id="cwrap">
+      <pre class="cview hljs"><code>${hl}</code></pre>
+      <textarea class="cedit" id="cedit" spellcheck="false" aria-label="Edit ${nameOf(active)}">${escA(content)}</textarea>
+    </div>`;
+
+  // Sync scroll
+  const cwrap = document.getElementById('cwrap');
+  const lns = document.getElementById('lns');
+  cwrap.addEventListener('scroll', () => { lns.scrollTop = cwrap.scrollTop; }, { passive: true });
+
+  if (editing) {
+    const ta = document.getElementById('cedit');
+    ta.focus();
+    ta.addEventListener('input', () => {
+      const v = ta.value;
+      n.c = v; modified.add(active);
+      try {
+        const sv = JSON.parse(localStorage.getItem('fc-edits')||'{}');
+        sv[active] = v; localStorage.setItem('fc-edits', JSON.stringify(sv));
+      } catch{}
+      const nl = v.split('\n').length;
+      lns.textContent = Array.from({length:nl},(_,i)=>i+1).join('\n');
+      stLines.textContent = `${nl} lines`;
+      renderTabs(); renderTree();
+    });
+    ta.addEventListener('keydown', e => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const s = ta.selectionStart, en = ta.selectionEnd;
+        ta.value = ta.value.slice(0,s) + '  ' + ta.value.slice(en);
+        ta.selectionStart = ta.selectionEnd = s+2;
+        ta.dispatchEvent(new Event('input'));
+      }
+      if ((e.ctrlKey||e.metaKey) && e.key==='s') {
+        e.preventDefault(); editing=false; renderEditor(); toast('Saved');
+      }
+    });
+  }
+
+  stLang.textContent = langLabel(l);
+  stLines.textContent = `${lcount} lines`;
+  stLines.hidden = false; stSep.hidden = false; edBtn.hidden = false;
+  if (editing) {
+    edBtn.textContent = '✦ Editing — Ctrl+S to save';
+    edBtn.style.color = 'var(--org)';
+    edBtn.onclick = () => { editing=false; renderEditor(); toast('Saved'); };
+  } else {
+    edBtn.textContent = 'Edit';
+    edBtn.style.color = '';
+    edBtn.onclick = () => { editing=true; renderEditor(); };
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// CONTEXT MENU
+// ═══════════════════════════════════════════════════════
+
+function showCtx(path, x, y, isDir=false) {
+  const menu = document.getElementById('ctx');
+  const items = isDir
+    ? [
+        {l:'New File',    f:()=>promptNew(path,'f')},
+        {l:'New Folder',  f:()=>promptNew(path,'d')},
+        {sep:true},
+        {l:'Rename',      f:()=>promptRename(path)},
+        {l:'Delete',      f:()=>confirmDelete(path), cls:'del'},
+      ]
+    : [
+        {l:'Open',        f:()=>openFile(path)},
+        {sep:true},
+        {l:'Rename',      f:()=>promptRename(path)},
+        {l:'Delete',      f:()=>confirmDelete(path), cls:'del'},
+      ];
+  menu.innerHTML = items.map(it =>
+    it.sep ? '<div class="cx-sep"></div>'
+    : `<div class="cxi${it.cls?' '+it.cls:''}" role="button">${it.l}</div>`
+  ).join('');
+  const els = menu.querySelectorAll('.cxi');
+  const real = items.filter(i=>!i.sep);
+  els.forEach((el,i) => el.onclick = () => { hideCtx(); real[i].f(); });
+  menu.style.left = `${Math.min(x, innerWidth-200)}px`;
+  menu.style.top = `${Math.min(y, innerHeight-160)}px`;
+  menu.hidden = false;
+  setTimeout(()=>document.addEventListener('click', hideCtx, {once:true}), 10);
+}
+function hideCtx() { document.getElementById('ctx').hidden = true; }
+
+// ═══════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════
+
+function modal(title, msg, inputVal, placeholder, buttons) {
+  const ov = document.getElementById('mover');
+  const mTitle = document.getElementById('mTitle');
+  const mMsg = document.getElementById('mMsg');
+  const mInput = document.getElementById('mInput');
+  const mRow = document.getElementById('mRow');
+
+  mTitle.textContent = title;
+  if (msg) { mMsg.textContent = msg; mMsg.hidden = false; }
+  else { mMsg.hidden = true; }
+  mInput.value = inputVal || '';
+  mInput.placeholder = placeholder || '';
+  mInput.hidden = !placeholder && inputVal === undefined;
+
+  mRow.innerHTML = '';
+  const cleanup = () => { ov.hidden = true; mInput.onkeydown = null; };
+  for (const b of buttons) {
+    const btn = document.createElement('button');
+    btn.className = `mbtn${b.cls?' '+b.cls:''}`;
+    btn.textContent = b.l;
+    btn.onclick = () => { cleanup(); b.f(mInput.value.trim()); };
+    mRow.appendChild(btn);
+  }
+  mInput.onkeydown = e => {
+    if (e.key==='Enter') { cleanup(); buttons.find(b=>b.ok)?.f(mInput.value.trim()); }
+    if (e.key==='Escape') { cleanup(); }
+  };
+  ov.hidden = false;
+  if (placeholder !== undefined) setTimeout(()=>{ mInput.focus(); if(inputVal) mInput.select(); },40);
+}
+
+// ═══════════════════════════════════════════════════════
+// FILE OPERATIONS
+// ═══════════════════════════════════════════════════════
+
+function parentContainer(path) {
+  const p = parentOf(path);
+  if (!p) return D;
+  const pn = node(p);
+  return pn?.ch || null;
+}
+
+function promptNew(parentPath, type) {
+  const ph = type==='f' ? 'newfile.py' : 'newfolder';
+  modal(`New ${type==='f'?'File':'Folder'}`, null, '', ph, [
+    {l:'Cancel', f:()=>{}},
+    {l:'Create', cls:'ok', ok:true, f:(name) => {
+      if (!name) return;
+      const pn = node(parentPath);
+      if (!pn?.ch) return;
+      if (pn.ch[name]) { toast('Name already exists'); return; }
+      if (type==='f') {
+        pn.ch[name] = {t:'f', l:lang(name), c:''};
+        expanded.add(parentPath);
+        renderTree();
+        openFile(`${parentPath}/${name}`);
+      } else {
+        pn.ch[name] = {t:'d', ch:{}};
+        expanded.add(parentPath);
+        expanded.add(`${parentPath}/${name}`);
+        renderTree();
+      }
+      toast(`Created "${name}"`);
+    }},
+  ]);
+}
+
+function promptNewRoot(type) {
+  const ph = type==='f' ? 'newfile.py' : 'newfolder';
+  modal(`New ${type==='f'?'File':'Folder'}`, null, '', ph, [
+    {l:'Cancel', f:()=>{}},
+    {l:'Create', cls:'ok', ok:true, f:(name) => {
+      if (!name) return;
+      if (D[name]) { toast('Name already exists'); return; }
+      if (type==='f') {
+        D[name] = {t:'f', l:lang(name), c:''};
+        renderTree(); openFile(name);
+      } else {
+        D[name] = {t:'d', ch:{}}; expanded.add(name); renderTree();
+      }
+      toast(`Created "${name}"`);
+    }},
+  ]);
+}
+
+function promptRename(path) {
+  const name = nameOf(path);
+  modal('Rename', null, name, 'new name', [
+    {l:'Cancel', f:()=>{}},
+    {l:'Rename', cls:'ok', ok:true, f:(newName) => {
+      if (!newName || newName===name) return;
+      const container = parentContainer(path);
+      if (!container) return;
+      if (container[newName]) { toast('Name already exists'); return; }
+      container[newName] = container[name];
+      delete container[name];
+      const p = parentOf(path);
+      const newPath = p ? `${p}/${newName}` : newName;
+      const idx = tabs.indexOf(path);
+      if (idx !== -1) {
+        tabs[idx] = newPath;
+        if (active===path) active = newPath;
+      }
+      renderTree(); renderTabs(); renderEditor();
+      toast(`Renamed to "${newName}"`);
+    }},
+  ]);
+}
+
+function confirmDelete(path) {
+  const name = nameOf(path);
+  modal('Delete file?', `"${name}" will be permanently removed.`, undefined, undefined, [
+    {l:'Cancel', f:()=>{}},
+    {l:'Delete', cls:'danger', f:() => {
+      const container = parentContainer(path);
+      if (!container) return;
+      tabs = tabs.filter(t => t!==path && !t.startsWith(path+'/'));
+      if (!tabs.includes(active)) active = tabs[tabs.length-1]||null;
+      delete container[name];
+      modified.delete(path);
+      renderTree(); renderTabs(); renderEditor();
+      toast(`"${name}" deleted`);
+    }},
+  ]);
+}
+
+// ═══════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════
+
+function showSearch() {
+  modal('Search in files', null, '', 'search term…', [
+    {l:'Cancel', f:()=>{}},
+    {l:'Search', cls:'ok', ok:true, f:(term) => {
+      if (!term) return;
+      const hits = [];
+      function walk(obj, base) {
+        for (const [name, item] of Object.entries(obj)) {
+          const path = base ? `${base}/${name}` : name;
+          if (item.t==='f' && item.c) {
+            item.c.split('\n').forEach((line,i) => {
+              if (line.toLowerCase().includes(term.toLowerCase()))
+                hits.push({path, line:i+1, text:line.trim()});
+            });
+          } else if (item.t==='d' && item.ch) walk(item.ch, path);
+        }
+      }
+      walk(D, '');
+      if (!hits.length) { toast(`No results for "${term}"`); return; }
+      openFile(hits[0].path);
+      toast(`${hits.length} match${hits.length>1?'es':''} for "${term}"`);
+    }},
+  ]);
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('on'), 2200);
+}
+
+// ═══════════════════════════════════════════════════════
+// SIDEBAR (MOBILE)
+// ═══════════════════════════════════════════════════════
+
+function closeSidebar() {
+  if (innerWidth > 620) return;
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbarBack').classList.remove('on');
+}
+
+document.getElementById('mobTog').onclick = () => {
+  const sb = document.getElementById('sidebar');
+  const bk = document.getElementById('sbarBack');
+  const open = sb.classList.toggle('open');
+  bk.classList.toggle('on', open);
+};
+document.getElementById('sbarBack').onclick = closeSidebar;
+
+// ═══════════════════════════════════════════════════════
+// WIRING
+// ═══════════════════════════════════════════════════════
+
+document.getElementById('themeTog').onclick = () => {
+  const r = document.documentElement;
+  const cur = r.getAttribute('data-theme');
+  const next = cur==='light' ? 'dark' : cur==='dark' ? null : 'light';
+  next ? r.setAttribute('data-theme',next) : r.removeAttribute('data-theme');
+  try { localStorage.setItem('fc-theme', next||'system'); } catch{}
+};
+
+document.getElementById('newFile').onclick = () => promptNewRoot('f');
+document.getElementById('newFolder').onclick = () => promptNewRoot('d');
+document.getElementById('searchBtn').onclick = showSearch;
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey||e.ctrlKey) && e.key==='k') { e.preventDefault(); showSearch(); }
+  if (e.key==='Escape') { hideCtx(); document.getElementById('mover').hidden=true; }
+});
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+
+renderTree();
+renderTabs();
+renderEditor();
+openFile('README.md');
+</script>
